@@ -7,6 +7,7 @@ import { useOrganization, useOrganizationList } from "@clerk/nextjs"
 import { Plus } from "lucide-react"
 import Link from "next/link"
 import { useLocalStorage } from "usehooks-ts"
+import { SidebarItem, Org } from "./SidebarItem"
 
 interface SidebarProps{
     storageKey?: string
@@ -99,10 +100,15 @@ export const Sidebar = ({storageKey = "t-sidebar-state"}: SidebarProps) => {
                     space-y-2
                 "
             >
-                { userMemberships.data.map(({organization}) =>(
-                    <p key={organization.id}>
-                        { organization.id }
-                    </p>
+                { 
+                    userMemberships.data.map(({ organization }) =>(
+                    <SidebarItem
+                        key={ organization.id }
+                        isActive= { activeOrg?.id === organization.id}
+                        isExpand= { expand[organization.id] }
+                        org={ organization as Org }
+                        onExpand={ onExpand }
+                    />
                 ))}
             </Accordion>
         </>
