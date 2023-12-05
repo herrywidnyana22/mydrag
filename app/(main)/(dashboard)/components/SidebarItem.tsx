@@ -1,11 +1,13 @@
 'use client'
 
+import Image from "next/image"
+
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { Activity, CreditCard, Layout, Settings } from "lucide-react"
-import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export type Org = {
     id: string
@@ -72,9 +74,9 @@ export const SidebarItem = ({
                     text-start
                     no-underline
                     text-neutral-700
-                    hover:bg-neutral-500/10
+                    hover:bg-neutral-500/20
                     hover:no-underline`,
-                    isActive && !isExpand && "bg-sky500/20 text-sky-700"
+                    isActive && !isExpand && "bg-fuchsia-500/20 text-sky-700"
                 )}
             >
                 <div
@@ -129,9 +131,13 @@ export const SidebarItem = ({
                                 justify-start
                                 font-normal
                                 mb-1
-                                pl-10`,
+                                pl-10
+                                hover:bg-neutral-500/20`,
                                 url === item.href && 
-                                "bg-sky-500/10 text-sky-700"
+                                `bg-fuchsia-500/20 
+                                text-sky-700
+                                hover:bg-fuchsia-500/20`
+                                
                             )}
                         >
                             {item.icon}
@@ -141,5 +147,40 @@ export const SidebarItem = ({
                 }
             </AccordionContent>
         </AccordionItem>
+    )
+}
+
+SidebarItem.Skeleton = function SekletonSidebarItem(){
+    return(
+        <div
+            className="
+                flex
+                gap-x-2
+                items-center
+            "
+        >
+            <div
+                className="
+                    relative
+                    w-10
+                    h-10
+                    shrink-0
+                "
+            >
+                <Skeleton 
+                    className="
+                        absolute
+                        w-full
+                        h-full
+                    "
+                />    
+            </div>
+            <Skeleton 
+                className="
+                    w-full
+                    h-10
+                "
+            />
+        </div>
     )
 }
