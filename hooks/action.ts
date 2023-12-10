@@ -27,9 +27,7 @@ export const useAction = <input, output> (
                 return
             }
 
-            if(result.fieldError){
-                setFieldError(result.fieldError)
-            }
+            setFieldError(result.fieldError)
 
             if(result.error){
                 setError(result.error)

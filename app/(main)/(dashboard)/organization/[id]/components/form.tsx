@@ -1,10 +1,11 @@
 "use client"
 
+import InputForm from "@/components/form/inputForm"
+
 import { ValidateState, createBoard } from "@/actions/board/add"
-import { InputForm } from "./input"
-import { ButtonForm } from "./button"
 import { useAction } from "@/hooks/action"
 import { addBoard } from "@/actions/board/handler"
+import ButtonForm from "@/components/form/buttonForm"
 
 export const Form = () => {
     const { execute, fieldError } = useAction(addBoard, {
@@ -30,10 +31,14 @@ export const Form = () => {
                     gap-2
                 "
             >
-                <InputForm 
+                <InputForm
+                    id="title"
+                    label="Project Title"
                     error={fieldError}
                 />
-                <ButtonForm/>
+                <ButtonForm>
+                    save
+                </ButtonForm>
             </div>
         </form>
     )
