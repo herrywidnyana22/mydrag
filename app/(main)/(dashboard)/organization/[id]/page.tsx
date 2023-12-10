@@ -1,36 +1,32 @@
-import { createBoard } from "@/actions/board/add";
-import { Button } from "@/components/ui/button";
-import { db } from "@/lib/db";
-import Board from "./components/board";
-import { Form } from "./components/form";
+import { Separator } from "@/components/ui/separator";
+import Info from "./components/info";
+import ProjectList from "./components/projectList";
+
 
 const OrganizationPage = async() => {
-    const boardData = await db.board.findMany()
 
     return ( 
         <div
             className="
-                flex
-                flex-col
-                space-y-4
+                w-full
+                mb-20
             "
         >
-            <Form/>
+            <Info/>
+            <Separator
+                className="
+                    my-4
+                "
+            />
             <div
                 className="
-                    space-y-2
+                    px-2
+                    md:px-4
                 "
             >
-                {
-                    boardData.map((boardItem) =>(
-                        <Board
-                            key={boardItem.id} 
-                            id={boardItem.id}
-                            title={boardItem.title}
-                        />
-                    ))
-                }
+                <ProjectList/>
             </div>
+
         </div>
      );
 }
