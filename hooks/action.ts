@@ -46,6 +46,10 @@ export const useAction = <input, output> (
     },[action, option])
 
     return{
-        execute, fieldError, error, data, isLoading
+        data, 
+        execute, 
+        fieldError, 
+        error, 
+        isLoading,
     }
 }
