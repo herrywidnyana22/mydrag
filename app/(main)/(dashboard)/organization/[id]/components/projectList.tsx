@@ -1,5 +1,6 @@
 import { HelpCircle, User2 } from "lucide-react";
 import { HoverMe } from "@/components/HoverMe";
+import { PopoverForm } from "@/components/form/popover";
 
 const ProjectList = () => {
     return ( 
@@ -36,45 +37,50 @@ const ProjectList = () => {
                 "
             
             >
-                <div
-                    role="button"
-                    className="
-                        relative
-                        w-full
-                        h-full
-                        flex
-                        flex-col
-                        gap-y-1
-                        justify-center
-                        items-center
-                        aspect-video
-                        rounded-sm
-                        bg-muted
-                        transition
-                        hover:opacity-75
-                    "
+                <PopoverForm
+                    to="right"
+                    gap={10}
                 >
-                    <p className="text-sm font-bold">
-                        Buat project baru
-                    </p>
-                    <span className="text-xs">5 Slot tersisa</span>
-                    <HoverMe
-                        gap={40}
-                        text={`Free Member hanya dapat menambahkan sampai maksimal 5 project. Untuk unlimited 
-                            project silahkan upgrade dan menjadi member.
-                        `}
+                    <div
+                        role="button"
+                        className="
+                            relative
+                            w-full
+                            h-full
+                            flex
+                            flex-col
+                            gap-y-1
+                            justify-center
+                            items-center
+                            aspect-video
+                            rounded-sm
+                            bg-muted
+                            transition
+                            hover:opacity-75
+                        "
                     >
-                        <HelpCircle
-                            className="
-                                absolute
-                                w-[14px]
-                                h-[14px]
-                                right-2
-                                bottom-2
-                            "
-                        />
-                    </HoverMe>
-                </div>
+                        <p className="text-sm font-bold">
+                            Buat project baru
+                        </p>
+                        <span className="text-xs">5 Slot tersisa</span>
+                        <HoverMe
+                            gap={40}
+                            text={`Free Member hanya dapat menambahkan sampai maksimal 5 project. Untuk unlimited 
+                                project silahkan upgrade dan menjadi member.
+                            `}
+                        >
+                            <HelpCircle
+                                className="
+                                    absolute
+                                    w-[14px]
+                                    h-[14px]
+                                    right-2
+                                    bottom-2
+                                "
+                            />
+                        </HoverMe>
+                    </div>
+                </PopoverForm>
             </div>
         </div>
      );
