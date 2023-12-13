@@ -5,7 +5,7 @@ interface ErrorFormProps {
     error?: Record<string, string[] | undefined>
 }
 
-const ErrorMsg = ({id, error}: ErrorFormProps) => {
+const ValidateMsg = ({id, error}: ErrorFormProps) => {
     if(!error) return null
 
     return(
@@ -47,4 +47,4 @@ const ErrorMsg = ({id, error}: ErrorFormProps) => {
     )
 }
  
-export default ErrorMsg;
+export default ValidateMsg;

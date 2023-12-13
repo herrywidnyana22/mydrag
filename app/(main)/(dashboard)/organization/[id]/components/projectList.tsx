@@ -38,7 +38,7 @@ const ProjectList = () => {
             
             >
                 <PopoverForm
-                    to="right"
+                    position="right"
                     gap={10}
                 >
                     <div

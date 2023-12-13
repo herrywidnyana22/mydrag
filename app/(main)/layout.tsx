@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs"
+import { Toaster } from "sonner"
 
 const MainLayout = ({
     children
@@ -7,9 +8,8 @@ const MainLayout = ({
 }) =>{
     return(
         <ClerkProvider>
-            {
-                children
-            }
+            <Toaster/>
+            { children }
         </ClerkProvider>
     )
 }

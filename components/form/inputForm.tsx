@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import { cn } from "@/lib/utils"
-import ErrorMsg from "./errorMsg"
+import ErrorMsg from "./validateMsg"
 
 interface InputProps{
     id: string
@@ -15,7 +15,7 @@ interface InputProps{
     placeholder?: string
     required?: boolean
     disabled?: boolean
-    error?: Record<string, string[] | undefined>
+    validateMsg?: Record<string, string[] | undefined>
     className?: string
     onBlur?: () => void
 }
@@ -28,7 +28,7 @@ const InputForm = forwardRef<HTMLInputElement, InputProps>(({
     placeholder, 
     required, 
     disabled, 
-    error, 
+    validateMsg, 
     className, 
     onBlur
 }, ref) => {
@@ -83,7 +83,7 @@ const InputForm = forwardRef<HTMLInputElement, InputProps>(({
             </div>
             <ErrorMsg
                 id={id}
-                error={error}
+                error={validateMsg}
             />
         </div>
     )

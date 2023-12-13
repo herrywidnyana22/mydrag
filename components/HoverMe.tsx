@@ -5,13 +5,13 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix
 interface TooltipProps{
     children: React.ReactNode
     text: string
-    to?: "left" | "right" | "top" | "bottom"
+    position?: "left" | "right" | "top" | "bottom"
     gap? : number
 }
 
 export const HoverMe =({
     text,
-    to = "bottom",
+    position = "bottom",
     gap= 0,
     children,
 }: TooltipProps) =>{
@@ -25,7 +25,7 @@ export const HoverMe =({
                 </TooltipTrigger>
                 <TooltipContent
                     sideOffset={gap}
-                    side={to}
+                    side={position}
                     className="
                         max-w-[220px]
                         text-xs
