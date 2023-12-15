@@ -16,7 +16,7 @@ const ButtonForm = ({
     children,
     disabled,
     className,
-    varian
+    varian = "primary"
 }: ButtonProps) => {
     const { pending } = useFormStatus()
     return (

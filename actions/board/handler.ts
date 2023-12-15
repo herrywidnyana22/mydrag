@@ -8,22 +8,44 @@ import { createAction } from "@/lib/createAction"
 import { AddBoard } from "./init"
 
 const handler = async (data: InputType): Promise<ReturnType> =>{
-    const { userId } = auth()
+    const { userId, orgId } = auth()
 
-    if(!userId){
+    if(!userId || !orgId){
         return {
             error: "Akses dibatasi!"
         }
     }
 
-    const { title } = data
+    const { title, image } = data
+                                
+    // value={`${imageItem.id}|${imageItem.urls.thumb}|${imageItem.urls.full}|${imageItem.links.html}|${imageItem.user.name}`}
+    const [
+        imageId,
+        imageUrl,
+        imageFullUrl,
+        imageLinkHTML,
+        imageUserName,
+    ] = image.split("|")
+
+    if(!imageId || !imageUrl || !imageFullUrl || !imageLinkHTML || !imageUserName){
+        return {
+            error: "Bambar tidak ditemukan. Gagal menambahkan Project baru"
+        }
+    }
 
     let QueryCreateBoard
 
     try {
         QueryCreateBoard = await db.board.create({
             data:{
-                title: title
+                title,
+                orgId,
+                imageId,
+                imageUrl,
+                imageFullUrl,
+                imageLinkHTML,
+                imageUserName,
+
             }
         })
     } catch (error) {

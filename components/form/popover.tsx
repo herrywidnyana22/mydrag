@@ -1,5 +1,6 @@
 'use client'
 
+import { ElementRef, useRef } from "react"
 import { toast } from "sonner"
 import { X } from "lucide-react"
 import { Button } from "../ui/button"
@@ -9,6 +10,8 @@ import { addBoard } from "@/actions/board/handler"
 
 import InputForm from "./inputForm"
 import ButtonForm from "./buttonForm"
+import Picker from "./picker"
+import { useRouter } from "next/navigation"
 
 interface PopoverProps{
     children: React.ReactNode
@@ -24,10 +27,14 @@ export const PopoverForm = ({
     children
 }: PopoverProps) =>{
 
+    const closeRef = useRef<ElementRef<"button">>(null)
+    const redirect = useRouter()
+
     const { execute, fieldError } = useAction(addBoard,{
         onSuccess: (data) =>{
-            console.log({data})
             toast.success("Berhasil ditambahkan..")
+            closeRef.current?.click()
+            redirect.push(`/board/${data.id}`)
         },
         onError: (error) =>{
             console.log({error})
@@ -37,9 +44,13 @@ export const PopoverForm = ({
 
     const onSubmit = (data: FormData) =>{
         const title = data.get("title") as string
-        execute({title})
+        const image = data.get("image")as string
+
+        console.log({image})
+        execute({title, image})
     }
 
+    
     return(
         <Popover>
             <PopoverTrigger asChild>
@@ -65,7 +76,7 @@ export const PopoverForm = ({
                 >
                     Buat Project Baru
                 </div>
-                <PopoverClose asChild>
+                <PopoverClose ref={closeRef} asChild>
                     <Button
                         variant="ghost"
                         className="
@@ -94,6 +105,10 @@ export const PopoverForm = ({
                             space-y-4
                         "
                     >
+                        <Picker
+                            id="image"
+                            validateMsg={fieldError}
+                        />
                         <InputForm
                             id="title"
                             label="Nama Project"
