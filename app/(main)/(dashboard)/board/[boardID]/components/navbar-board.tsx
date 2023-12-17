@@ -1,5 +1,5 @@
 import { Board } from "@prisma/client";
-import TitleBoard from "./board-title";
+import TitleBoard from "./boardTitle";
 import OpsiBoard from "./opsi-board";
 
 interface NavbarBoardProps{
