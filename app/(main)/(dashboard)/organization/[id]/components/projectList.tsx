@@ -1,8 +1,29 @@
+import Link from "next/link";
+
 import { HelpCircle, User2 } from "lucide-react";
 import { HoverMe } from "@/components/HoverMe";
 import { PopoverForm } from "@/components/form/popover";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const ProjectList = () => {
+const ProjectList = async() => {
+    const { orgId } = auth()
+
+    if(!orgId) {
+        return redirect("/org-list")
+    }
+
+    const boardData = await db.board.findMany({
+        where: {
+           orgId, 
+        },
+        orderBy:{
+            createdAt: "desc"
+        }
+    })
+
     return ( 
         <div
             className="
@@ -37,6 +58,49 @@ const ProjectList = () => {
                 "
             
             >
+                {
+                    boardData.map((item, i) => (
+                        <Link
+                            key={item.id}
+                            href={`/board/${item.id}`}
+                            style={{backgroundImage: `url(${item.imageUrl})`}}
+                            className="
+                                group
+                                relative
+                                w-full
+                                h-full
+                                p-2
+                                aspect-video
+                                bg-no-repeat
+                                bg-center
+                                bg-cober
+                                rounded-sm
+                                overflow-hidden
+                                bg-sky-700
+                            "
+                        >
+                            <div
+                                className="
+                                    absolute
+                                    inset-0
+                                    transition
+                                    bg-black/30
+                                    group-hover:bg-black/40
+                                "   
+                            />
+                            <p
+                                className="
+                                    relative
+                                    font-semibold
+                                    text-sm
+                                    text-white
+                                "
+                            >
+                                {item.title}
+                            </p>
+                        </Link>
+                    ))
+                }
                 <PopoverForm
                     position="right"
                     gap={10}
@@ -85,5 +149,85 @@ const ProjectList = () => {
         </div>
      );
 }
+
+ProjectList.Skeleton = function SkeletonProjectList() {
+    return(
+        <div
+            className="
+                grid
+                grid-cols-2
+                gap-4
+                sm:grid-cols-3
+                lg:grid-cols-4
+            "
+        >
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+            <Skeleton 
+                className="
+                    w-full
+                    h-full
+                    aspect-video
+                    p-2
+                "
+            />
+        </div>
+    )
+}
+
  
 export default ProjectList;

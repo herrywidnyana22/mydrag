@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import Info from "./components/info";
 import ProjectList from "./components/projectList";
+import { Suspense } from "react";
 
 
 const OrganizationPage = async() => {
@@ -24,9 +25,12 @@ const OrganizationPage = async() => {
                     md:px-4
                 "
             >
-                <ProjectList/>
+                <Suspense
+                    fallback={<ProjectList.Skeleton/>}
+                >
+                    <ProjectList/>
+                </Suspense>
             </div>
-
         </div>
      );
 }
