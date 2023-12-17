@@ -6,7 +6,7 @@ import { X } from "lucide-react"
 import { Button } from "../ui/button"
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { useAction } from "@/hooks/action"
-import { addBoard } from "@/actions/board/handler"
+import { addBoard } from "@/actions/board/create"
 
 import InputForm from "./inputForm"
 import ButtonForm from "./buttonForm"
@@ -37,7 +37,6 @@ export const PopoverForm = ({
             redirect.push(`/board/${data.id}`)
         },
         onError: (error) =>{
-            console.log({error})
             toast.error(error)
         }
     })
@@ -86,7 +85,9 @@ export const PopoverForm = ({
                             top-2
                             right-2
                             p-2
-                            text-rose-500
+                            text-rose-600
+                            hover:bg-rose-500
+                            hover:text-white
                         "
                     >
                         <X

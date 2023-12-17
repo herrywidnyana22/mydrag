@@ -2,17 +2,17 @@
 
 import { db } from "@/lib/db"
 import { auth } from "@clerk/nextjs"
-import { InputType, ReturnType } from "./types"
+import { InputCreate, ReturnTypeCreate } from "./types"
 import { revalidatePath } from "next/cache"
 import { createAction } from "@/lib/createAction"
-import { AddBoard } from "./init"
+import { initCreateBoard } from "./init"
 
-const handler = async (data: InputType): Promise<ReturnType> =>{
+const handler = async (data: InputCreate): Promise<ReturnTypeCreate> =>{
     const { userId, orgId } = auth()
 
     if(!userId || !orgId){
         return {
-            error: "Akses dibatasi!"
+            error: "Anda tidak memiliki akses!"
         }
     }
 
@@ -29,7 +29,7 @@ const handler = async (data: InputType): Promise<ReturnType> =>{
 
     if(!imageId || !imageUrl || !imageFullUrl || !imageLinkHTML || !imageUserName){
         return {
-            error: "Bambar tidak ditemukan. Gagal menambahkan Project baru"
+            error: "Gambar tidak ditemukan. Gagal menambahkan Project baru"
         }
     }
 
@@ -55,7 +55,10 @@ const handler = async (data: InputType): Promise<ReturnType> =>{
     }
 
     revalidatePath(`/board/${QueryCreateBoard.id}`)
-    return { data: QueryCreateBoard }
+
+    return { 
+        data: QueryCreateBoard 
+    }
 }
 
-export const addBoard = createAction(AddBoard, handler)
+export const addBoard = createAction(initCreateBoard, handler)
