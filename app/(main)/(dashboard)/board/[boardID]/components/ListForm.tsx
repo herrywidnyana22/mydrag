@@ -1,22 +1,48 @@
 'use client'
 
 import InputForm from "@/components/form/inputForm";
-import ListWrapper from "./ListWarpper";
+import ListWrapper from "./listWrapper";
 import ButtonForm from "@/components/form/buttonForm";
 
 import { Plus, X } from "lucide-react";
 import { ElementRef, useRef, useState } from "react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useAction } from "@/hooks/action";
+import { addList } from "@/actions/list/create";
+import { toast } from "sonner";
 
 const ListForm = () => {
     const [isEditMode, setIsEditMode] = useState(false)
 
     const urlName = useParams()
+    const router = useRouter()
 
     const refForm = useRef<ElementRef<"form">>(null)
     const refInput = useRef<ElementRef<"input">>(null)
+
+    const { execute, fieldError }= useAction(addList, {
+        onSuccess: (data) =>{
+            toast.success(`List ${data.title} berhasil ditambahkan`)
+            editModeOFF()
+            router.refresh()
+        },
+        onError: (errorMsg) =>{
+            toast.error(errorMsg)
+        }
+    })
+
+    const onSubmit = (formData: FormData) =>{
+        const title = formData.get("title") as string
+        const boardID = formData.get("boardID") as string
+
+        execute({
+            title,
+            boardID
+        })
+    }
+
 
     const editModeON = () =>{
         setIsEditMode(true)
@@ -29,19 +55,20 @@ const ListForm = () => {
         setIsEditMode(false)
     }
 
-    const onKeyPress = (e:KeyboardEvent) =>{
+    const onKeyboardPress = (e:KeyboardEvent) =>{
         if(e.key === "Escape"){
             editModeOFF()
         }
     }
 
-    useEventListener("keydown", onKeyPress)
+    useEventListener("keydown", onKeyboardPress)
     useOnClickOutside(refForm, editModeOFF)
 
     if(isEditMode){
         return(
             <ListWrapper>
                 <form
+                    action={onSubmit}
                     ref={refForm}
                     className="
                         w-full
@@ -56,6 +83,7 @@ const ListForm = () => {
                         id="title"
                         ref={refInput}
                         placeholder="Masukkan judul List..."
+                        validateMsg={fieldError}
                         className="
                             h-7
                             px-2
@@ -70,7 +98,7 @@ const ListForm = () => {
                     />
                     <input
                         name="boardID"
-                        value={urlName.boardId}
+                        value={urlName.boardID}
                         hidden
                     />
 
@@ -91,12 +119,14 @@ const ListForm = () => {
                             onClick={editModeOFF}
                             size="sm"
                             variant="ghost"
+                            className="
+                                text-rose-500
+                            "
                         >
                             <X
                                 className="
                                     w-5
-                                    h-5
-                                    text-rose-500
+                                    h-5                                    
                                 "
                             />
                         </Button>

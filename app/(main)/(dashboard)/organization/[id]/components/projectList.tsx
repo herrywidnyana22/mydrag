@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { HelpCircle, User2 } from "lucide-react";
+import { HelpCircle, Plus, User2 } from "lucide-react";
 import { HoverMe } from "@/components/HoverMe";
 import { PopoverForm } from "@/components/form/popover";
 import { auth } from "@clerk/nextjs";
@@ -118,15 +118,25 @@ const ProjectList = async() => {
                             items-center
                             aspect-video
                             rounded-sm
-                            bg-muted
+                            border-2
+                            border-dashed
                             transition
                             hover:opacity-75
                         "
                     >
+                        <Plus 
+                            className="
+                                w-6
+                                h-6
+                                font-bold
+                                mb-2
+                                text-sky-600
+                            "
+                        />
                         <p className="text-sm font-bold">
                             Buat project baru
                         </p>
-                        <span className="text-xs">5 Slot tersisa</span>
+                        <span className="text-xs">5 slot tersisa</span>
                         <HoverMe
                             gap={40}
                             text={`Free Member hanya dapat menambahkan sampai maksimal 5 project. Untuk unlimited 

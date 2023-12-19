@@ -1,8 +1,8 @@
+import ContainerList from "./components/listContainer";
+
 import { getDataListByBoardID } from "@/actions/list/get";
-import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import ContainerList from "./components/containerList";
 
 interface BoardPageProps{
     params:{
