@@ -22,7 +22,7 @@ const ListItem = ({position, data}: ListItemProps) => {
       <div
         className="
             w-full
-            pb-2
+            pb-1.5
             shadow-md
             rounded-md
             bg-[#f1f2f4]

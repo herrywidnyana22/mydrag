@@ -38,12 +38,10 @@ const Picker = ({id, validateMsg}: PickerProps) => {
                     const resultImage = (result.response as Array<Record<string, any>>)
                     setImage(resultImage)
                 } else {
-                    console.log("Gagal mendapatkan foto dari Unsplash")
                     toast.error("Gagal mendapatkan foto dari Unsplash")
                 }
 
             } catch (error) {
-                console.log(error)
                 // setImage([])
                 setImage(defaultImage)
             } finally{

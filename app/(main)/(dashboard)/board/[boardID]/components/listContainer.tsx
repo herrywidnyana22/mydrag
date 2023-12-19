@@ -1,6 +1,6 @@
 'use client'
 
-import ListForm from "./listForm"
+import AddListForm from "./addListForm"
 import ListItem from "./listItem"
 
 import { List } from "@prisma/client"
@@ -36,7 +36,7 @@ const ContainerList = ({boardID, data}: ContainerListProps) => {
                     />
                 ))
             }
-            <ListForm/>
+            <AddListForm/>
             <div
                 className="
                     flex-shrink-0

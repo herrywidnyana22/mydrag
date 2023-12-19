@@ -13,7 +13,7 @@ import { useAction } from "@/hooks/action";
 import { addList } from "@/actions/list/create";
 import { toast } from "sonner";
 
-const ListForm = () => {
+const AddListForm = () => {
     const [isEditMode, setIsEditMode] = useState(false)
 
     const urlName = useParams()
@@ -73,7 +73,7 @@ const ListForm = () => {
                     className="
                         w-full
                         space-y-4
-                        p-3
+                        p-2
                         rounded-md
                         shadow-md
                         bg-white
@@ -155,6 +155,7 @@ const ListForm = () => {
                         flex
                         w-full
                         items-center
+                        space-x-2
                         rounded-md
                         font-medium
                         text-sm
@@ -167,14 +168,13 @@ const ListForm = () => {
                         className="
                             w-4
                             h-4
-                            mr-2
                         "
                     />
-                    Tambah List
+                    <p>Tambah List</p>
                 </button>
             </form>
         </ListWrapper>
     );
 }
  
-export default ListForm;
+export default AddListForm;

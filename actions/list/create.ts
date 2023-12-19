@@ -21,7 +21,6 @@ const handler = async (data: InputCreate): Promise<ReturnTypeCreate> =>{
     let QueryCreateList
 
     try {
-        console.log(`Board ID : ${boardID}`)
         const boardId = await db.board.findUnique({
             where:{
                 id: boardID,

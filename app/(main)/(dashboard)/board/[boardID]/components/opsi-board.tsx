@@ -4,7 +4,6 @@ import { deleteBoard } from "@/actions/board/delete";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from "@/components/ui/popover";
 import { useAction } from "@/hooks/action";
-import { error } from "console";
 import { MoreHorizontal, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 

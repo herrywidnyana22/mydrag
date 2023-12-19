@@ -16,15 +16,18 @@ const handler = async(data: InputUpdate): Promise<ReturnTypeUpdate> =>{
         }
     }
 
-    const { title, boardID } = data
+    const { id, title, boardID } = data
     
     let queryUpdate
 
     try {
-        queryUpdate = await db.board.update({
+        queryUpdate = await db.list.update({
             where:{
-                id: boardID, 
-                orgId
+                id,
+                boardID,
+                board:{
+                    orgId
+                }
             },
             data:{
                 title
@@ -43,4 +46,4 @@ const handler = async(data: InputUpdate): Promise<ReturnTypeUpdate> =>{
     }
 }
 
-export const updateBoard = createAction(initUpdateList, handler)
+export const updateList = createAction(initUpdateList, handler)

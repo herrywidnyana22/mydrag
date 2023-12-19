@@ -18,10 +18,17 @@ export const initUpdateList = z.object({
     }).min(3, {
         message: "Masukkan minimal 3 karakter!"
     }),
-
+    
+    id: z.string(),
     boardID: z.string()
 })
 
 export const initDeleteList = z.object({
-    id: z.string()
+    id: z.string(),
+    boardID: z.string()
+})
+
+export const initCopyList = z.object({
+    id: z.string(),
+    boardID: z.string()
 })
