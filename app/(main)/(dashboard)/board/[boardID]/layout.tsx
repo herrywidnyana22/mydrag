@@ -1,7 +1,7 @@
-import { db } from "@/lib/db"
+import NavbarBoard from "./components/navbarBoard"
+
 import { auth } from "@clerk/nextjs"
 import { notFound, redirect } from "next/navigation"
-import NavbarBoard from "./components/navbar-board"
 import { getByID } from "@/actions/board/get"
 
 
