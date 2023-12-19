@@ -110,9 +110,7 @@ const AddListForm = () => {
                             gap-x-1
                         "
                     >
-                        <ButtonForm
-                        
-                        >
+                        <ButtonForm>
                             Tambah List Baru
                         </ButtonForm>
                         <Button
@@ -121,6 +119,8 @@ const AddListForm = () => {
                             variant="ghost"
                             className="
                                 text-rose-500
+                                hover:bg-rose-500
+                                hover:text-white
                             "
                         >
                             <X
@@ -155,7 +155,7 @@ const AddListForm = () => {
                         flex
                         w-full
                         items-center
-                        space-x-2
+                        space-x-1
                         rounded-md
                         font-medium
                         text-sm

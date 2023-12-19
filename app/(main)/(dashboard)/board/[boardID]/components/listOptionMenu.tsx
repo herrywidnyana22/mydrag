@@ -181,6 +181,7 @@ const ListOptionMenu = ({data, onCreateCard}: ListOptionMenuProps) => {
                             px-5
                             space-x-2
                             font-normal
+                            text-muted-foreground
                             text-sm
                             rounded-none
                             hover:bg-rose-700

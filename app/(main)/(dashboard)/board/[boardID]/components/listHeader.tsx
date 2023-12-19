@@ -10,7 +10,12 @@ import { ElementRef, useRef, useState } from "react"
 import { useEventListener } from "usehooks-ts"
 import { toast } from "sonner"
 
-const ListHeader = ({dataList}: {dataList: List}) => {
+interface ListHeaderProps{
+    onCreateCard: () => void
+    dataList: List
+}
+
+const ListHeader = ({dataList, onCreateCard}: ListHeaderProps) => {
     
     const [title, setTitle] = useState(dataList.title)
     const [isEditMode, setIsEditMode] = useState(false)
@@ -135,6 +140,7 @@ const ListHeader = ({dataList}: {dataList: List}) => {
                                 h-7
                                 px-3
                                 py-1
+                                mb-3
                                 font-medium
                                 text-sm
                                 border-transparent
@@ -148,7 +154,7 @@ const ListHeader = ({dataList}: {dataList: List}) => {
 
             <ListOptionMenu
                 data={dataList}
-                onCreateCard={() =>{}}
+                onCreateCard={onCreateCard}
             />
         </div>
     )

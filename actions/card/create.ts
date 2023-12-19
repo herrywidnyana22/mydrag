@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs"
 import { InputCreate, ReturnTypeCreate } from "./types"
 import { revalidatePath } from "next/cache"
 import { createAction } from "@/lib/createAction"
-import { initCreateList } from "./init"
+import { initCreateCard } from "./init"
 
 const handler = async (data: InputCreate): Promise<ReturnTypeCreate> =>{
     const { userId, orgId } = auth()
@@ -16,48 +16,46 @@ const handler = async (data: InputCreate): Promise<ReturnTypeCreate> =>{
         }
     }
 
-    const { title, boardID } = data
+    const { title, boardID, listID } = data
                                 
-    let QueryCreateList
+    let QueryCreateCard
 
     try {
-        const boardId = await db.board.findUnique({
+        const dataList = await db.list.findUnique({
             where:{
-                id: boardID,
-                orgId
+                id: listID,
+                board:{
+                    orgId
+                }
             }
         })
 
-        if(!boardId){
-            return{
-                error: "Board tidak ditemukan"
-            }
-        }
+        if(!dataList) return { error: "Data list tidak ditemukan..."}
 
-        const lastList = await db.list.findFirst({
+        const lastCard = await db.card.findFirst({
             where:{
-                boardID
+                listID
             },
             orderBy:{
-                position: 'asc'
+                position: 'desc'
             },
             select:{
                 position: true
             }
         })
 
-        const newPosition = lastList 
-        ? lastList.position + 1 
+        const newCardPosition = lastCard
+        ? lastCard.position + 1
         : 1
 
-        QueryCreateList = await db.list.create({
+        QueryCreateCard = await db.card.create({
             data:{
                 title,
-                boardID,
-                position: newPosition
-                // position: 1
+                listID,
+                position: newCardPosition
             }
         })
+
     } catch (error) {
         return{
             error: "Gagal menambahkan data.."
@@ -67,8 +65,8 @@ const handler = async (data: InputCreate): Promise<ReturnTypeCreate> =>{
     revalidatePath(`/board/${boardID}`)
 
     return { 
-        data: QueryCreateList 
+        data: QueryCreateCard
     }
 }
 
-export const addList = createAction(initCreateList, handler)
+export const addCard = createAction(initCreateCard, handler)
