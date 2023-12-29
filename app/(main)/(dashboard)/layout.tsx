@@ -9,7 +9,6 @@ const DashboardLayout = ({
         <div
             className="
                 h-full
-
             "
         >
             <Navbar/>

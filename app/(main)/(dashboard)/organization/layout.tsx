@@ -1,3 +1,5 @@
+import { Sidebar } from "../components/Sidebar";
+
 const OrganizationLayout = ({children}: {
     children: React.ReactNode
 }) => {
@@ -26,7 +28,7 @@ const OrganizationLayout = ({children}: {
                         md:block
                     "
                 >
-
+                    <Sidebar/>
                 </div>
                 { children }
 

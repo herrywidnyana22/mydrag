@@ -2,6 +2,8 @@ import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs"
 import { Plus } from "lucide-react"
+import MobileSidebar from "./MobileSidebar"
+import { PopoverForm } from "@/components/form/popover"
 
 export const Navbar = () => {
   return (
@@ -20,7 +22,7 @@ export const Navbar = () => {
             bg-white
         "
     >
-        {/* Mobile Sidebar */}
+        <MobileSidebar/>
         <div
             className="
                 flex
@@ -36,42 +38,50 @@ export const Navbar = () => {
             >
                 <Logo/>
             </div>
-            <Button
-                size="sm"
-                variant="thema"
-                className="
-                    hidden
-                    h-auto
-                    rounded-md
-                    p-2
-                    md:flex
-                    gap-1
-                "
+            <PopoverForm
+                align="center"
+                position="bottom"
+                gap={18}
             >
-                <Plus
+                <Button
+                    size="sm"
+                    variant="thema"
                     className="
-                        h-4
-                        w-4
+                        hidden
+                        h-auto
+                        rounded-md
+                        p-2
+                        md:flex
+                        gap-1
                     "
-                />
-                Buat Baru
-            </Button>
-            <Button
-                size="sm"
-                variant="thema"
-                className="
-                    block
-                    rounded-md
-                    md:hidden
-                "
-            >
-                <Plus
+                >
+                    <Plus
+                        className="
+                            h-4
+                            w-4
+                        "
+                    />
+                    Buat Baru
+                </Button>
+            </PopoverForm>
+            <PopoverForm>
+                <Button
+                    size="sm"
+                    variant="thema"
                     className="
-                        h-4
-                        w-4
+                        block
+                        rounded-md
+                        md:hidden
                     "
-                />
-            </Button>
+                >
+                    <Plus
+                        className="
+                            h-4
+                            w-4
+                        "
+                    />
+                </Button>
+            </PopoverForm>
         </div>
 
         {/* Organization Option List */}
